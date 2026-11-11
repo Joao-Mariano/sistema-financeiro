@@ -4,7 +4,7 @@ from flask import Flask
 from sqlalchemy import URL, text
 
 from extensions import db
-from models import Usuario, Categoria, Receita
+from models import Usuario, Categoria, Receita, Recorrencia, CompraParcelada
 
 
 app = Flask (__name__)
