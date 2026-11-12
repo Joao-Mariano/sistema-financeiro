@@ -1,6 +1,7 @@
 from extensions import db
 
 class CompraParcelada(db.Model):
+    
     __tablename__ = "compra_parcelada"
 
     id_compra_parcelada = db.Column(

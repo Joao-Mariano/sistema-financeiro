@@ -21,7 +21,7 @@ class Receita(db.Model):
         nullable=False
     )
 
-    descrição = db.Column(
+    descricao = db.Column(
         db.String(150),
         nullable=False
     )
@@ -42,7 +42,7 @@ class Receita(db.Model):
         default="PENDENTE"
     )
 
-    data_criação = db.Column(
+    data_criacao = db.Column(
         db.DateTime,
         nullable=False,
         server_default=db.func.now()
