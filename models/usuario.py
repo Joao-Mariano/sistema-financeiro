@@ -30,3 +30,34 @@ class Usuario(db.Model):
         nullable=False,
         server_default=db.func.now()
     )
+
+    categorias = db.relationship(
+        "Categoria",
+        backref="usuario",
+        lazy=True
+    )
+
+    receitas = db.relationship(
+        "Receita",
+        back_populates="usuario",
+        lazy=True
+    )
+
+    recorrencias = db.relationship(
+        "Recorrencia",
+        back_populates="usuario",
+        lazy=True
+    )
+
+    compras_parceladas = db.relationship(
+        "CompraParcelada",
+        back_populates="usuario",
+        lazy=True
+    )
+
+    despesas = db.relationship(
+        "Despesa",
+        back_populates="usuario",
+        lazy=True
+    )
+    

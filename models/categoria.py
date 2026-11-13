@@ -36,3 +36,28 @@ class Categoria(db.Model):
         nullable=False,
         server_default=db.func.now()
     )
+
+    receitas = db.relationship(
+        "Receita",
+        back_populates="categoria",
+        lazy=True
+    )
+
+    despesas = db.relationship(
+        "Despesa",
+        back_populates="categoria",
+        lazy=True
+    )
+
+    recorrencias = db.relationship(
+        "Recorrencia",
+        back_populates="categoria",
+        lazy=True
+    )
+
+    compras_parceladas = db.relationship(
+        "CompraParcelada",
+        back_populates="categoria",
+        lazy=True
+    )
+    

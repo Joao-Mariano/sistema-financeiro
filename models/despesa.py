@@ -33,6 +33,16 @@ class Despesa(db.Model):
         nullable=True
     )
 
+    numero_parcela = db.Column(
+        db.Integer,
+        nullable=True
+    )
+
+    total_parcelas = db.Column(
+        db.Integer,
+        nullable=True
+    )
+
     descricao = db.Column(
         db.String(150),
         nullable=False
@@ -59,3 +69,24 @@ class Despesa(db.Model):
         nullable=False,
         server_default=db.func.now()
     )
+
+    categoria = db.relationship(
+        "Categoria",
+        back_populates="despesas"
+    )
+
+    recorrencia = db.relationship(
+        "Recorrencia",
+        back_populates="despesas"
+    )
+
+    compra_parcelada = db.relationship(
+        "CompraParcelada",
+        back_populates="despesas"
+    )
+
+    usuario = db.relationship(
+        "Usuario",
+        back_populates="despesas"
+    )
+    

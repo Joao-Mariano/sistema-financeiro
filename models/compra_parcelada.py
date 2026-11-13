@@ -52,3 +52,20 @@ class CompraParcelada(db.Model):
         nullable=False,
         server_default=db.func.now()
     )
+
+    usuario = db.relationship(
+        "Usuario",
+        back_populates="compras_parceladas"
+    )
+
+    despesas = db.relationship(
+        "Despesa",
+        back_populates="compra_parcelada",
+        lazy=True
+    )
+
+    categoria = db.relationship(
+        "Categoria",
+        back_populates="compras_parceladas"
+    )
+    

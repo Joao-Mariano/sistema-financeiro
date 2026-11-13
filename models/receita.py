@@ -47,3 +47,14 @@ class Receita(db.Model):
         nullable=False,
         server_default=db.func.now()
     )
+
+    usuario = db.relationship(
+        "Usuario",
+        back_populates="receitas"
+    )
+
+    categoria = db.relationship(
+        "Categoria",
+        back_populates="receitas"
+    )
+    

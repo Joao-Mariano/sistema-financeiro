@@ -57,3 +57,20 @@ class Recorrencia(db.Model):
         nullable=False,
         server_default=db.func.now()
     )
+
+    usuario = db.relationship(
+        "Usuario",
+        back_populates="recorrencias"
+    )
+
+    despesas = db.relationship(
+        "Despesa",
+        back_populates="recorrencia",
+        lazy=True
+    )
+
+    categoria = db.relationship(
+        "Categoria",
+        back_populates="recorrencias"
+    )
+    
