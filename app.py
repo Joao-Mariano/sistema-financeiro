@@ -3,11 +3,15 @@ import os
 from flask import Flask
 from sqlalchemy import URL, text
 
-from extensions import db
+from extensions import db, login_manager
 from models import Usuario, Categoria, Receita, Recorrencia, CompraParcelada, Despesa
+
+from routes.auth import auth_bp
 
 
 app = Flask (__name__)
+
+app.config["SECRET_KEY"] = os.environ["FLASK_SECRET_KEY"]
 
 
 database_url = URL.create(
@@ -24,6 +28,16 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 
 db.init_app(app)
+
+login_manager.init_app(app)
+
+login_manager.login_view = "auth.login"
+
+app.register_blueprint(auth_bp)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return db.session.get(Usuario, int(user_id))
 
 
 @app.route("/")

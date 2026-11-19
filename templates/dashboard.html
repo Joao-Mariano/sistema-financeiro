@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - Sistema Financeiro</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+   
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+
+<body>
+
+    <header class="cabecalho">
+
+        <div class="container-fluid">
+
+            <div class="d-flex justify-content-between align-items-center">
+                
+                <h1 class="logo">Sistema Financeiro</h1>
+
+                <nav>
+                    <a href="{{ url_for('auth.dashboard') }}" class="link-nav">
+                        Dashboard
+                    </a>
+
+                    <form action="{{ url_for('auth.logout') }}" method="POST" class="form-logout">
+                        <button type="submit" class="btn-sair">
+                            Sair
+                        </button>
+                    </form>
+                </nav>
+
+            </div>
+
+        </div>
+
+    </header>
+    
+    <main class="dashboard-container">
+
+        
+        <section class="saudacao">
+            <h2>Olá, {{ current_user.nome }}!</h2>
+            <p>Aqui está um resumo das suas finanças.</p>
+        </section>
+
+        
+        <section class="resumo-financeiro">
+
+            
+            <div class="card-financeiro">
+                <h3>Saldo atual</h3>
+                <p class="valor">R$ {{ "%.2f"|format(saldo_atual|float) }}</p>
+                <span class="descricao-card">Seu saldo disponível</span>
+            </div>
+
+            
+            <div class="card-financeiro">
+                <h3>Receitas recebidas</h3>
+                <p class="valor">R$ {{ "%.2f"|format(total_receitas|float) }}</p>
+                <span class="descricao-card">Total de entradas</span>
+            </div>
+
+            
+            <div class="card-financeiro">
+                <h3>Despesas pagas</h3>
+                <p class="valor">R$ {{ "%.2f"|format(total_despesas|float) }}</p>
+                <span class="descricao-card">Total de saídas</span>
+            </div>
+
+        </section>
+
+            <!-- dashbord inferior -->
+        <section class="dashboard-inferior">
+
+            <!-- Gráfico -->
+            <div class="painel-dashboard painel-grafico">
+
+                <h3>Receitas x Despesas</h3>
+                <p class="subtitulo-painel">Visão geral das movimentações financeiras</p>
+
+                <div class="area-grafico">
+                    <canvas
+                        id="graficoFinanceiro"
+                        data-receitas="{{ total_receitas }}"
+                        data-despesas="{{ total_despesas }}">
+                    </canvas>
+                </div>
+
+            </div>
+
+            
+            <div class="painel-dashboard painel-contas">
+
+                <h3>Próximas contas</h3>
+                <p class="subtitulo-painel">Despesas próximas do vencimento</p>
+
+                <div class="lista-contas">
+
+                    {% if proximas_contas %}
+
+                        {% for conta in proximas_contas %}
+
+                            <div class="conta-item">
+
+                                <div class="conta-info">
+
+                                    <span class="conta-nome">
+                                        {{ conta.descricao }}
+                                    </span>
+
+                                    <span class="conta-data">
+                                        Vencimento:
+                                        {{ conta.data_vencimento.strftime('%d/%m/%Y') }}
+                                    </span>
+
+                                </div>
+
+                                <div class="conta-detalhes">
+
+                                    <span class="conta-valor">
+                                        R$ {{ "%.2f"|format(conta.valor|float) }}
+                                    </span>
+
+                                    {% if conta.data_vencimento < hoje %}
+                                        <span class="status-vencida">Vencida</span>
+                                    {% else %}
+                                        <span class="status-pendente">Pendente</span>
+                                    {% endif %}
+
+                                </div>
+
+                            </div>
+
+                        {% endfor %}
+
+                    {% else %}
+
+                        <p class="mensagem-sem-contas">
+                            Nenhuma conta pendente encontrada.
+                        </p>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
+</body>
+</html>

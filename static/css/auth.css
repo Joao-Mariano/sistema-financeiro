@@ -1,0 +1,114 @@
+:root {
+    --cor-primaria: #183B2B;
+    --cor-secundaria: #C6A15B;
+    --cor-secundaria-clara: #E5D2A3;
+    --cor-fundo: #FAF9F6;
+    --cor-branco: #FFFFFF;
+}
+
+body {
+    background-color: var(--cor-fundo);
+    font-family: Arial, sans-serif;
+}
+
+.cadastro-card {
+    background-color: var(--cor-branco);
+    width: 100%;
+    max-width: 450px;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(24, 59, 43, 0.08);
+}
+
+.cadastro-card h1 {
+    font-size: 26px;
+    font-weight: bold;
+    color: var(--cor-primaria);
+}
+
+.cadastro-card h2 {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--cor-primaria);
+}
+
+.form-control {
+    padding: 11px;
+    border-color: #DAD8D0;
+}
+
+.form-control:focus {
+    border-color: var(--cor-secundaria);
+    box-shadow: 0 0 0 0.2rem rgba(198, 161, 91, 0.20);
+}
+
+.btn-primary {
+    padding: 11px;
+    background-color: var(--cor-secundaria);
+    border-color: var(--cor-secundaria);
+    color: var(--cor-primaria);
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background-color: var(--cor-secundaria-clara);
+    border-color: var(--cor-secundaria-clara);
+    color: var(--cor-primaria);
+}
+
+a {
+    color: var(--cor-primaria);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--cor-secundaria);
+}
+
+/* login */
+
+.login-card {
+    background-color: var(--cor-branco);
+    width: 100%;
+    max-width: 450px;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(24, 59, 43, 0.08);
+}
+
+.login-card h1 {
+    font-size: 26px;
+    font-weight: bold;
+    color: var(--cor-primaria);
+}
+
+.login-card h2 {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--cor-primaria);
+}
+
+.login-card .form-control {
+    padding: 11px;
+    border-color: #DAD8D0;
+}
+
+.login-card .form-control:focus {
+    border-color: var(--cor-secundaria);
+    box-shadow: 0 0 0 0.2rem rgba(198, 161, 91, 0.20);
+}
+
+.login-card .btn-primary {
+    padding: 11px;
+    background-color: var(--cor-secundaria);
+    border-color: var(--cor-secundaria);
+    color: var(--cor-primaria);
+    font-weight: bold;
+}
+
+.login-card .btn-primary:hover {
+    background-color: var(--cor-secundaria-clara);
+    border-color: var(--cor-secundaria-clara);
+    color: var(--cor-primaria);
+}

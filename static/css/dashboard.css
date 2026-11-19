@@ -1,0 +1,298 @@
+:root {
+    --cor-primaria: #183B2B;
+    --cor-secundaria: #C6A15B;
+    --cor-secundaria-clara: #E5D2A3;
+    --cor-fundo: #FAF9F6;
+    --cor-branco: #FFFFFF;
+}
+
+
+body {
+    background-color: var(--cor-fundo);
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+
+.cabecalho {
+    background-color: var(--cor-primaria);
+    padding: 20px 30px;
+}
+
+
+.logo {
+    color: var(--cor-branco);
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+
+.cabecalho nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+
+.link-nav {
+    color: var(--cor-branco);
+    text-decoration: none;
+    font-size: 16px;
+}
+
+
+.link-nav:hover {
+    color: var(--cor-secundaria-clara);
+}
+
+
+.form-logout {
+    margin: 0;
+}
+
+
+.btn-sair {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-primaria);
+    border: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.btn-sair:hover {
+    background-color: var(--cor-secundaria-clara);
+}
+
+
+.dashboard-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 35px;
+}
+
+
+.saudacao {
+    margin-bottom: 30px;
+}
+
+
+.saudacao h2 {
+    color: var(--cor-primaria);
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+
+.saudacao p {
+    color: #777;
+    font-size: 16px;
+    margin: 0;
+}
+
+
+.resumo-financeiro {
+    display: flex;
+    gap: 25px;
+    margin-bottom: 35px;
+}
+
+
+.card-financeiro {
+    background-color: var(--cor-branco);
+    flex: 1;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #EAE7DF;
+    box-shadow: 0 4px 12px rgba(24, 59, 43, 0.05);
+}
+
+
+.card-financeiro h3 {
+    color: #777;
+    font-size: 16px;
+    font-weight: normal;
+    margin-bottom: 15px;
+}
+
+
+.card-financeiro .valor {
+    color: var(--cor-primaria);
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+
+.descricao-card {
+    color: #999;
+    font-size: 14px;
+}
+
+
+/* telas menores */
+@media (max-width: 768px) {
+
+    .dashboard-container {
+        padding: 20px;
+    }
+
+    .resumo-financeiro {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .card-financeiro .valor {
+        font-size: 26px;
+    }
+
+    .saudacao h2 {
+        font-size: 24px;
+    }
+
+    .dashboard-inferior {
+    grid-template-columns: 1fr;
+    }
+
+    .painel-dashboard {
+    padding: 20px;
+    }
+
+}
+
+
+/* dashboard inferior */
+.dashboard-inferior {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 25px;
+}
+
+
+.painel-dashboard {
+    background-color: var(--cor-branco);
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #EAE7DF;
+    box-shadow: 0 4px 12px rgba(24, 59, 43, 0.05);
+}
+
+
+.painel-dashboard h3 {
+    color: var(--cor-primaria);
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+
+.subtitulo-painel {
+    color: #999;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+
+.area-grafico {
+    position: relative;
+    width: 100%;
+    height: 280px;
+}
+
+
+.lista-contas {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.conta-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding: 18px 0;
+    border-bottom: 1px solid #EEECE6;
+}
+
+
+.conta-item:last-child {
+    border-bottom: none;
+}
+
+
+.conta-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+
+.conta-nome {
+    color: var(--cor-primaria);
+    font-weight: 600;
+    font-size: 15px;
+}
+
+
+.conta-data {
+    color: #999;
+    font-size: 13px;
+}
+
+
+.conta-valor {
+    color: var(--cor-primaria);
+    font-weight: bold;
+    font-size: 15px;
+    white-space: nowrap;
+}
+
+
+.mensagem-sem-dados {
+    color: #999;
+    font-size: 15px;
+    text-align: center;
+    margin: 0;
+}
+
+
+.conta-detalhes {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+
+.status-pendente {
+    color: #9A752F;
+    background-color: #F7F0DF;
+    padding: 4px 9px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
+.status-vencida {
+    color: #B42318;
+    background-color: #FDE8E7;
+    padding: 4px 9px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
+.mensagem-sem-contas {
+    color: #999;
+    font-size: 14px;
+    text-align: center;
+    padding: 25px 0;
+    margin: 0;
+}

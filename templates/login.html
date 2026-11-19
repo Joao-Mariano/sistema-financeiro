@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>     <meta charset="UTF-8">     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Login | Sistema Financeiro</title>
+
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+>
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/auth.css') }}"
+>
+
+</head>
+
+<body>
+
+<main class="container-fluid min-vh-100 d-flex align-items-center justify-content-center">
+
+    <section class="login-card">
+
+        <div class="text-center mb-4">
+
+            <h1>Sistema Financeiro</h1>
+
+            <p class="text-muted">
+                Organize suas finanças em um só lugar.
+            </p>
+
+        </div>
+
+        <h2 class="text-center mb-4">Acessar sua conta</h2>
+
+        {% with mensagens = get_flashed_messages(with_categories=true) %}
+
+            {% if mensagens %}
+
+                {% for categoria, mensagem in mensagens %}
+
+                    <div class="alert alert-{{ categoria }}" role="alert">
+                        {{ mensagem }}
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+
+        <form method="POST">
+
+            <div class="mb-3">
+
+                <label for="email" class="form-label">
+                    E-mail
+                </label>
+
+                <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    placeholder="Digite seu e-mail"
+                    required
+                >
+
+            </div>
+
+            <div class="mb-4">
+
+                <label for="senha" class="form-label">
+                    Senha
+                </label>
+
+                <input
+                    type="password"
+                    class="form-control"
+                    id="senha"
+                    name="senha"
+                    placeholder="Digite sua senha"
+                    required
+                >
+
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">
+                Entrar
+            </button>
+
+        </form>
+
+        <p class="text-center mt-4 mb-0">
+            Ainda não possui uma conta?
+            <a href="{{ url_for('auth.cadastro') }}">Cadastre-se</a>
+        </p>
+
+    </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body> \</html>

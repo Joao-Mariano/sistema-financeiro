@@ -1,6 +1,7 @@
+from flask_login import UserMixin
 from extensions import db
 
-class Usuario(db.Model):
+class Usuario(UserMixin, db.Model):
 
     __tablename__ = "usuario"
 
@@ -60,4 +61,6 @@ class Usuario(db.Model):
         back_populates="usuario",
         lazy=True
     )
-    
+
+    def get_id(self):
+            return str(self.id_usuario)
