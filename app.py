@@ -1,5 +1,6 @@
 import os
 
+from dotenv import load_dotenv
 from flask import Flask
 from sqlalchemy import URL, text
 
@@ -8,6 +9,7 @@ from models import Usuario, Categoria, Receita, Recorrencia, CompraParcelada, De
 
 from routes.auth import auth_bp
 
+load_dotenv()
 
 app = Flask (__name__)
 

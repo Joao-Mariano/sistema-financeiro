@@ -1,0 +1,350 @@
+:root {
+    --cor-primaria: #183B2B;
+    --cor-secundaria: #C6A15B;
+    --cor-secundaria-clara: #E5D2A3;
+    --cor-fundo: #FAF9F6;
+    --cor-branco: #FFFFFF;
+}
+
+
+body {
+    background-color: var(--cor-fundo);
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+
+.cabecalho {
+    background-color: var(--cor-primaria);
+    padding: 20px 30px;
+}
+
+
+.logo {
+    color: var(--cor-branco);
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+
+.cabecalho nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+
+.link-nav {
+    color: var(--cor-branco);
+    text-decoration: none;
+    font-size: 16px;
+}
+
+
+.link-nav:hover {
+    color: var(--cor-secundaria-clara);
+}
+
+
+.form-logout {
+    margin: 0;
+}
+
+
+.btn-sair {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-primaria);
+    border: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.btn-sair:hover {
+    background-color: var(--cor-secundaria-clara);
+}
+
+
+
+.receita-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 35px;
+}
+
+
+.titulo-pagina {
+    margin-bottom: 30px;
+}
+
+
+.titulo-pagina h2 {
+    color: var(--cor-primaria);
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+
+.titulo-pagina p {
+    color: #4A4A4A;
+    font-size: 16px;
+}
+
+
+
+
+.formulario-receita {
+    background-color: var(--cor-branco);
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid #e5e5e5;
+}
+
+
+.formulario-receita h3 {
+    color: var(--cor-primaria);
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+
+.campo-formulario {
+    margin-bottom: 20px;
+}
+
+
+.campo-formulario label {
+    display: block;
+    color: #4A4A4A;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+
+.campo-formulario input,
+.campo-formulario select {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+
+.campo-formulario input:focus,
+.campo-formulario select:focus {
+    outline: none;
+    border-color: var(--cor-secundaria);
+}
+
+
+.btn-cadastrar {
+    background-color: var(--cor-primaria);
+    color: var(--cor-branco);
+    border: none;
+    padding: 11px 22px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.btn-cadastrar:hover {
+    background-color: #24543d;
+}
+
+
+@media (max-width: 768px) {
+
+    .cabecalho {
+        padding: 15px;
+    }
+
+    .cabecalho nav {
+        gap: 12px;
+    }
+
+    .logo {
+        font-size: 19px;
+    }
+
+    .receita-container {
+        padding: 20px;
+    }
+
+}
+
+
+
+.mensagem {
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+
+.mensagem.sucesso {
+    background-color: #E8F3EC;
+    color: #183B2B;
+    border: 1px solid #A8C9B2;
+}
+
+
+.mensagem.erro {
+    background-color: #FCEAEA;
+    color: #8B2525;
+    border: 1px solid #E5B5B5;
+}
+
+
+
+.listagem-receitas {
+    background-color: #FFFFFF;
+    padding: 25px;
+    border-radius: 10px;
+    margin-top: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+
+.listagem-receitas h3 {
+    color: #183B2B;
+    font-size: 21px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+
+.tabela-receitas {
+    vertical-align: middle;
+    color: #4A4A4A;
+}
+
+
+.tabela-receitas thead th {
+    color: #183B2B;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+
+.tabela-receitas tbody td {
+    color: #4A4A4A;
+    padding: 14px 10px;
+}
+
+
+.status-recebida {
+    background-color: #E8F3EC;
+    color: #183B2B;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+
+.status-pendente {
+    background-color: #FFF4DD;
+    color: #8A641D;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+
+.sem-receitas {
+    color: #4A4A4A;
+    text-align: center;
+    padding: 25px 0;
+}
+
+
+
+.form-edicao-receita {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 15px;
+    background-color: #FAF9F6;
+    border-radius: 8px;
+}
+
+
+.campo-edicao {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 180px;
+    gap: 6px;
+}
+
+.campo-edicao label {
+    color: #4A4A4A;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+
+.campo-edicao input,
+.campo-edicao select {
+    padding: 9px;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    width: 100%;
+}
+
+
+.acoes-edicao {
+    display: flex;
+    align-items: end;
+    gap: 10px;
+    width: 100%;
+}
+
+
+.btn-editar,
+.btn-salvar {
+    background-color: #183B2B;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.btn-cancelar {
+    background-color: #E5D2A3;
+    color: #183B2B;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
+.form-excluir {
+    display: inline-block;
+}
+
+
+.btn-excluir {
+    background-color: #A83232;
+    color: #FFFFFF;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.btn-excluir:hover {
+    background-color: #852525;
+}

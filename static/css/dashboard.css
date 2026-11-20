@@ -89,7 +89,7 @@ body {
 
 
 .saudacao p {
-    color: #777;
+    color: #4A4A4A;
     font-size: 16px;
     margin: 0;
 }
@@ -113,7 +113,7 @@ body {
 
 
 .card-financeiro h3 {
-    color: #777;
+    color: #4A4A4A;
     font-size: 16px;
     font-weight: normal;
     margin-bottom: 15px;
@@ -129,7 +129,7 @@ body {
 
 
 .descricao-card {
-    color: #999;
+    color: #4A4A4A;
     font-size: 14px;
 }
 
@@ -191,7 +191,7 @@ body {
 
 
 .subtitulo-painel {
-    color: #999;
+    color: #4A4A4A;
     font-size: 14px;
     margin-bottom: 25px;
 }
@@ -240,7 +240,7 @@ body {
 
 
 .conta-data {
-    color: #999;
+    color: #4A4A4A;
     font-size: 13px;
 }
 
@@ -254,7 +254,7 @@ body {
 
 
 .mensagem-sem-dados {
-    color: #999;
+    color: #4A4A4A;
     font-size: 15px;
     text-align: center;
     margin: 0;
@@ -290,7 +290,7 @@ body {
 
 
 .mensagem-sem-contas {
-    color: #999;
+    color: #4A4A4A;
     font-size: 14px;
     text-align: center;
     padding: 25px 0;
