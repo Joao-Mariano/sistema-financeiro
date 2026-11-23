@@ -4,7 +4,7 @@ Sistema web de gerenciamento financeiro pessoal, desenvolvido como projeto acad�
 
 A aplicação permite que usuários organizem suas finanças pessoais, acompanhem receitas e despesas, controlem contas futuras e visualizem um resumo de sua situação financeira.
 
-Funcionalidades
+## Funcionalidades
 
 Usuários
 
@@ -59,17 +59,36 @@ Tecnologias utilizadas
 - JavaScript
 - Bootstrap
 
-Banco de dados
+## Estrutura do projeto
+
+O projeto está organizado em diretórios e arquivos responsáveis por diferentes partes da aplicação:
+
+- `app.py`: arquivo principal, responsável pela inicialização da aplicação Flask e configuração do banco de dados.
+- `models/`: contém os modelos que representam as entidades e tabelas do banco de dados.
+- `routes/`: contém as rotas responsáveis pelo processamento das requisições e pelas funcionalidades do sistema.
+- `templates/`: contém os arquivos HTML utilizados na interface.
+- `static/`: contém os arquivos CSS e JavaScript.
+- `extensions.py`: centraliza a configuração de extensões utilizadas pela aplicação.
+- `requirements.txt`: lista as dependências necessárias para executar o projeto.
+- `.env.example`: apresenta as variáveis de ambiente necessárias para a configuração local.
+
+## Banco de dados
 
 PostgreSQL
 
-Ferramentas
+## Criação da estrutura do banco de dados
+
+A estrutura do banco de dados é definida por meio dos modelos SQLAlchemy localizados na pasta `models/`. Durante a inicialização da aplicação, o método `db.create_all()` verifica e cria as tabelas necessárias no banco de dados PostgreSQL, caso ainda não existam.
+
+Para executar o sistema, é necessário criar previamente um banco de dados chamado `sistema_financeiro` e configurar os dados de conexão no arquivo `.env`.
+
+**Ferramentas**
 
 - Visual Studio Code
 - Git e GitHub
 - Lucidchart
 
-  Como executar o projeto
+## Como executar o projeto
 
 1. Clonar o repositório
 
@@ -120,6 +139,6 @@ A aplicação estará disponível localmente em:
 
 http://127.0.0.1:5000
 
-Projeto acadêmico
+## Projeto acadêmico
 
 Projeto desenvolvido para fins acadêmicos no curso de Análise e Desenvolvimento de Sistemas (ADS).
