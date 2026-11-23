@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from services.recorrencia_service import gerar_despesas_recorrentes, calcular_proximo_vencimento
+from email_validator import validate_email, EmailNotValidError
 
 from extensions import db
 from models.usuario import Usuario
@@ -48,6 +49,13 @@ def cadastro():
         
         if len(email) > 150:
             flash("O e-mail deve ter no máximo 150 caracteres.", "danger")
+            return redirect(url_for("auth.cadastro"))
+
+        try:
+            validate_email(email, check_deliverability=False)
+
+        except EmailNotValidError:
+            flash("Informe um endereço de e-mail válido.", "danger")
             return redirect(url_for("auth.cadastro"))
 
         
