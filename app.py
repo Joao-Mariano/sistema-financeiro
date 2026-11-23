@@ -13,29 +13,38 @@ from services.scheduler import iniciar_agendador
 
 load_dotenv()
 
-print("=== DIAGNÓSTICO DE CONEXÃO ===")
-print("DB_USER:", os.environ.get("DB_USER"))
-print("DB_HOST:", os.environ.get("DB_HOST"))
-print("DB_PORT:", os.environ.get("DB_PORT"))
-print("DB_NAME:", os.environ.get("DB_NAME"))
-print("DB_PASSWORD configurada:", bool(os.environ.get("DB_PASSWORD")))
-print("Tamanho da DB_PASSWORD:", len(os.environ.get("DB_PASSWORD", "")))
-print("==============================")
 
 app = Flask(__name__)
 
 app.config["SECRET_KEY"] = os.environ["FLASK_SECRET_KEY"]
 
-database_url = URL.create(
-    drivername="postgresql+psycopg",
-    username=os.environ.get("DB_USER", "postgres"),
-    password=os.environ["DB_PASSWORD"],
-    host=os.environ.get("DB_HOST", "localhost"),
-    port=int(os.environ.get("DB_PORT", 5432)),
-    database=os.environ.get("DB_NAME", "sistema_financeiro")
-)
+database_url_env = os.environ.get("DATABASE_URL")
 
-app.config["SQLALCHEMY_DATABASE_URI"] = database_url
+if database_url_env:
+    if database_url_env.startswith("postgres://"):
+        database_url_env = database_url_env.replace(
+            "postgres://", "postgresql+psycopg://", 1
+        )
+    elif database_url_env.startswith("postgresql://"):
+        database_url_env = database_url_env.replace(
+            "postgresql://", "postgresql+psycopg://", 1
+        )
+
+    app.config["SQLALCHEMY_DATABASE_URI"] = database_url_env
+
+else:
+    database_url = URL.create(
+        drivername="postgresql+psycopg",
+        username=os.environ.get("DB_USER", "postgres"),
+        password=os.environ["DB_PASSWORD"],
+        host=os.environ.get("DB_HOST", "localhost"),
+        port=int(os.environ.get("DB_PORT", 5432)),
+        database=os.environ.get("DB_NAME", "sistema_financeiro")
+    )
+
+    app.config["SQLALCHEMY_DATABASE_URI"] = database_url
+
+
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)
