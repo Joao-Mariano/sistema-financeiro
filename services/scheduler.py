@@ -15,13 +15,21 @@ def iniciar_agendador(app):
 
         with app.app_context():
 
-            quantidade = gerar_despesas_recorrentes()
+            try:
+                quantidade = gerar_despesas_recorrentes()
 
-            print(
-                f"Verificação de recorrências concluída. "
-                f"Despesas geradas: {quantidade}"
-            )
+                print(
+                    f"Verificação de recorrências concluída. "
+                    f"Despesas geradas: {quantidade}"
+                )
 
+            except Exception as erro:
+                print(f"Erro ao gerar despesas recorrentes: {erro}")
+
+    # Verificação inicial
+    executar_geracao()
+
+    # Verificações automáticas a cada 24 horas
     scheduler.add_job(
         func=executar_geracao,
         trigger="interval",
