@@ -13,6 +13,15 @@ from services.scheduler import iniciar_agendador
 
 load_dotenv()
 
+print("=== DIAGNÓSTICO DE CONEXÃO ===")
+print("DB_USER:", os.environ.get("DB_USER"))
+print("DB_HOST:", os.environ.get("DB_HOST"))
+print("DB_PORT:", os.environ.get("DB_PORT"))
+print("DB_NAME:", os.environ.get("DB_NAME"))
+print("DB_PASSWORD configurada:", bool(os.environ.get("DB_PASSWORD")))
+print("Tamanho da DB_PASSWORD:", len(os.environ.get("DB_PASSWORD", "")))
+print("==============================")
+
 app = Flask(__name__)
 
 app.config["SECRET_KEY"] = os.environ["FLASK_SECRET_KEY"]
