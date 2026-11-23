@@ -19,13 +19,19 @@
         <div class="container-fluid">
 
             <div class="d-flex justify-content-between align-items-center">
-                
+
                 <h1 class="logo">Sistema Financeiro</h1>
 
                 <nav>
-                    <a href="{{ url_for('auth.dashboard') }}" class="link-nav">
-                        Dashboard
-                    </a>
+                    <a href="{{ url_for('auth.dashboard') }}" class="link-nav">Dashboard</a>
+
+                    <a href="{{ url_for('auth.categorias') }}" class="link-nav">Categorias</a>
+
+                    <a href="{{ url_for('auth.receitas') }}" class="link-nav">Receitas</a>
+
+                    <a href="{{ url_for('auth.despesas') }}" class="link-nav">Despesas</a>
+
+                    <a href="{{ url_for('auth.minha_conta') }}" class="link-nav">Minha Conta</a>
 
                     <form action="{{ url_for('auth.logout') }}" method="POST" class="form-logout">
                         <button type="submit" class="btn-sair">

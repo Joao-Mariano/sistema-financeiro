@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Excluir Conta - Sistema Financeiro</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/excluir_conta.css') }}">
+</head>
+
+<body>
+
+    <header class="cabecalho">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center">
+
+                <h1 class="logo">Sistema Financeiro</h1>
+
+                <nav>
+                    <a href="{{ url_for('auth.dashboard') }}" class="link-nav">
+                        Dashboard
+                    </a>
+                </nav>
+
+            </div>
+        </div>
+    </header>
+
+    <main class="container exclusao-container">
+
+        <div class="card-exclusao">
+
+            <h2>Excluir minha conta</h2>
+
+            <div class="alert alert-danger">
+                <strong>Atenção!</strong>
+
+                <p>
+                    Essa ação é permanente e não poderá ser desfeita.
+                    Todos os seus dados financeiros serão excluídos,
+                    incluindo receitas, despesas, categorias,
+                    recorrências e compras parceladas.
+                </p>
+            </div>
+
+            {% with mensagens = get_flashed_messages(with_categories=true) %}
+                {% if mensagens %}
+                    {% for categoria, mensagem in mensagens %}
+                        <div class="alert alert-{{ 'danger' if categoria == 'erro' else 'success' }}">
+                            {{ mensagem }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST">
+
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+                <div class="mb-3">
+                    <label for="senha" class="form-label">
+                        Confirme sua senha atual
+                    </label>
+
+                    <input
+                        type="password"
+                        class="form-control"
+                        id="senha"
+                        name="senha"
+                        placeholder="Digite sua senha"
+                        required
+                    >
+                </div>
+
+                <div class="acoes-exclusao">
+
+                    <button type="submit" class="btn-excluir">
+                        Excluir permanentemente
+                    </button>
+
+                    <a href="{{ url_for('auth.minha_conta') }}" class="btn-cancelar">
+                        Cancelar
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

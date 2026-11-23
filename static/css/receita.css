@@ -348,3 +348,39 @@ body {
 .btn-excluir:hover {
     background-color: #852525;
 }
+
+
+@media (max-width: 768px) {
+
+    .cabecalho {
+        padding: 15px;
+    }
+
+    .cabecalho .container-fluid > .d-flex {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .logo {
+        font-size: 22px;
+        text-align: center;
+    }
+
+    .cabecalho nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 12px 16px;
+    }
+
+    .link-nav {
+        font-size: 14px;
+    }
+
+    .btn-sair {
+        padding: 7px 14px;
+        font-size: 14px;
+    }
+
+}

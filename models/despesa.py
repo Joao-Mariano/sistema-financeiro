@@ -1,8 +1,17 @@
 from extensions import db
+from sqlalchemy import UniqueConstraint
 
 class Despesa(db.Model):
 
     __tablename__ = "despesa"
+
+    __table_args__ = (
+        UniqueConstraint(
+            "id_recorrencia",
+            "data_vencimento",
+            name="uq_despesa_recorrencia_vencimento"
+        ),
+    )
 
     id_despesa = db.Column(
         db.Integer,

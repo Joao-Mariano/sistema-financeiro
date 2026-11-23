@@ -1,0 +1,157 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #FAF9F6;
+    font-family: Arial, sans-serif;
+    color: #183B2B;
+}
+
+
+
+.cabecalho {
+    background-color: #183B2B;
+    padding: 20px 30px;
+    color: white;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.link-nav {
+    color: #E5D2A3;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.link-nav:hover {
+    color: #C6A15B;
+}
+
+
+
+.exclusao-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 75vh;
+}
+
+
+
+.card-exclusao {
+    background-color: #FFFFFF;
+    width: 100%;
+    max-width: 550px;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+
+.card-exclusao h2 {
+    color: #183B2B;
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+
+
+.card-exclusao .alert-danger {
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.card-exclusao .alert-danger p {
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+
+
+
+.form-label {
+    color: #183B2B;
+    font-weight: 600;
+}
+
+.form-control {
+    padding: 11px;
+    border: 1px solid #D5D5D5;
+    border-radius: 7px;
+}
+
+.form-control:focus {
+    border-color: #C6A15B;
+    box-shadow: 0 0 0 0.2rem rgba(198, 161, 91, 0.2);
+}
+
+
+
+.acoes-exclusao {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.btn-excluir,
+.btn-cancelar {
+    flex: 1;
+    padding: 11px;
+    border-radius: 7px;
+    text-align: center;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-excluir {
+    background-color: #B02A37;
+    color: white;
+    border: none;
+}
+
+.btn-excluir:hover {
+    background-color: #8F1D29;
+}
+
+.btn-cancelar {
+    background-color: #E5D2A3;
+    color: #183B2B;
+    border: none;
+}
+
+.btn-cancelar:hover {
+    background-color: #C6A15B;
+    color: #183B2B;
+}
+
+
+@media (max-width: 576px) {
+    .cabecalho {
+        padding: 18px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .card-exclusao {
+        padding: 22px;
+    }
+
+    .card-exclusao h2 {
+        font-size: 22px;
+    }
+
+    .acoes-exclusao {
+        flex-direction: column;
+    }
+}

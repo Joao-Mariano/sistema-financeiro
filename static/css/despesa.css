@@ -1,0 +1,454 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    background-color: #FAF9F6;
+    font-family: Arial, sans-serif;
+    color: #183B2B;
+}
+
+
+.cabecalho {
+    background-color: #183B2B;
+    padding: 18px 25px;
+}
+
+
+.logo {
+    color: #E5D2A3;
+    font-size: 23px;
+    font-weight: 600;
+    margin: 0;
+}
+
+
+.cabecalho nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.link-nav {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+
+.link-nav:hover {
+    color: #E5D2A3;
+}
+
+
+.form-logout {
+    margin: 0;
+}
+
+
+.btn-sair {
+    background-color: #C6A15B;
+    color: #183B2B;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.despesa-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+
+.titulo-pagina {
+    margin-bottom: 30px;
+}
+
+
+.titulo-pagina h2 {
+    font-size: 28px;
+    font-weight: 600;
+}
+
+
+.titulo-pagina p {
+    color: #4A4A4A;
+    margin-top: 8px;
+}
+
+
+.selecao-despesa {
+    background-color: #FFFFFF;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+
+.selecao-despesa h3 {
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+
+
+.opcoes-despesa {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+
+.opcao-despesa {
+    background-color: #FAF9F6;
+    border: 1px solid #D8D2C5;
+    border-radius: 8px;
+    padding: 25px 15px;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+
+.opcao-despesa h4 {
+    font-size: 18px;
+    color: #183B2B;
+    margin-bottom: 12px;
+}
+
+
+.opcao-despesa p {
+    color: #4A4A4A;
+    font-size: 14px;
+    margin: 0;
+}
+
+
+.opcao-despesa:hover,
+.opcao-despesa.selecionada {
+    border: 2px solid #C6A15B;
+    background-color: #FFFDF8;
+}
+
+
+.formulario-despesa {
+    background-color: #FFFFFF;
+    padding: 25px;
+    border-radius: 10px;
+    margin-top: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+
+.formulario-despesa h3 {
+    font-size: 21px;
+    margin-bottom: 20px;
+}
+
+
+@media (max-width: 768px) {
+
+    .opcoes-despesa {
+        grid-template-columns: 1fr;
+    }
+
+    .cabecalho nav {
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+}
+
+
+.mensagem-formulario {
+    color: #4A4A4A;
+    margin-bottom: 0;
+    padding: 15px;
+    background-color: #FAF9F6;
+    border-radius: 6px;
+}
+
+
+
+.campo-formulario {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+    gap: 7px;
+}
+
+
+.campo-formulario label {
+    color: #4A4A4A;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+
+.campo-formulario input,
+.campo-formulario select {
+    padding: 11px;
+    border: 1px solid #CCC;
+    border-radius: 6px;
+    background-color: #FFFFFF;
+    color: #4A4A4A;
+    width: 100%;
+}
+
+
+.campo-formulario input:focus,
+.campo-formulario select:focus {
+    outline: none;
+    border-color: #C6A15B;
+}
+
+
+.btn-cadastrar {
+    background-color: #183B2B;
+    color: #FFFFFF;
+    border: none;
+    padding: 11px 22px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+
+.btn-cadastrar:hover {
+    background-color: #24543D;
+}
+
+
+
+.mensagem {
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.mensagem.sucesso {
+    background-color: #E8F3EC;
+    color: #183B2B;
+    border: 1px solid #A8C9B2;
+}
+
+.mensagem.erro {
+    background-color: #FCEAEA;
+    color: #8B2525;
+    border: 1px solid #E5B5B5;
+}
+
+
+
+.listagem-despesas {
+    background-color: #FFFFFF;
+    padding: 25px;
+    border-radius: 10px;
+    margin-top: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+
+.listagem-despesas h3 {
+    color: #183B2B;
+    font-size: 21px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+
+.tabela-despesas {
+    vertical-align: middle;
+    color: #4A4A4A;
+}
+
+
+.tabela-despesas thead th {
+    color: #183B2B;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+
+.tabela-despesas tbody td {
+    color: #4A4A4A;
+    padding: 14px 10px;
+}
+
+
+.status-paga {
+    background-color: #E8F3EC;
+    color: #183B2B;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+
+.status-pendente {
+    background-color: #FFF4DD;
+    color: #8A641D;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+
+.status-cancelada {
+    background-color: #FCEAEA;
+    color: #8B2525;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+
+.sem-despesas {
+    color: #4A4A4A;
+    text-align: center;
+    padding: 25px 0;
+}
+
+
+
+.form-edicao-despesa {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 15px;
+    background-color: #FAF9F6;
+    border-radius: 8px;
+}
+
+.campo-edicao {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 180px;
+    gap: 6px;
+}
+
+.campo-edicao label {
+    color: #4A4A4A;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.campo-edicao input,
+.campo-edicao select {
+    padding: 9px;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.acoes-edicao {
+    display: flex;
+    align-items: end;
+    gap: 10px;
+    width: 100%;
+}
+
+.btn-salvar-despesa {
+    background-color: #183B2B;
+    color: #FFFFFF;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-fechar-edicao {
+    background-color: #E5D2A3;
+    color: #183B2B;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
+.acoes-despesa {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-cancelar-despesa {
+    display: inline-flex;
+    margin: 0;
+}
+
+.btn-editar-despesa,
+.btn-cancelar-despesa {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: inherit;
+    transition: background-color 0.2s;
+}
+
+.btn-editar-despesa {
+    background-color: #183B2B;
+    color: #FFFFFF;
+}
+
+.btn-editar-despesa:hover {
+    background-color: #24523D;
+}
+
+.btn-cancelar-despesa {
+    background-color: #FCE8E8;
+    color: #B42318;
+}
+
+.btn-cancelar-despesa:hover {
+    background-color: #F8D5D5;
+}
+
+@media (max-width: 768px) {
+
+    .cabecalho {
+        padding: 15px;
+    }
+
+    .cabecalho .container-fluid > .d-flex {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .logo {
+        font-size: 22px;
+        text-align: center;
+    }
+
+    .cabecalho nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 12px 16px;
+    }
+
+    .link-nav {
+        font-size: 14px;
+    }
+
+    .btn-sair {
+        padding: 7px 14px;
+        font-size: 14px;
+    }
+
+}

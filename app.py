@@ -9,6 +9,8 @@ from models import Usuario, Categoria, Receita, Recorrencia, CompraParcelada, De
 
 from routes.auth import auth_bp
 
+from services.scheduler import iniciar_agendador
+
 load_dotenv()
 
 app = Flask (__name__)
@@ -48,17 +50,12 @@ def inicio():
 
 if __name__ == "__main__":
 
-        
     with app.app_context():
-
-        
         db.create_all()
-
-        
         db.session.execute(text("SELECT 1"))
-
         print("Conexão com Postgresql realizada com sucesso!")
         print("Tabelas verificadas/criadas com sucesso")
 
+    iniciar_agendador(app)
 
-    app.run (debug=True)
+    app.run(debug=True, use_reloader=False)

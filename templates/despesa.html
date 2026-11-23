@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Despesas - Sistema Financeiro</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/despesa.css') }}">
+</head>
+
+<body>
+
+    <header class="cabecalho">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center">
+
+                <h1 class="logo">Sistema Financeiro</h1>
+
+                <nav>
+                    <a href="{{ url_for('auth.dashboard') }}" class="link-nav">Dashboard</a>
+
+                    <a href="{{ url_for('auth.categorias') }}" class="link-nav">Categorias</a>
+
+                    <a href="{{ url_for('auth.receitas') }}" class="link-nav">Receitas</a>
+
+                    <a href="{{ url_for('auth.despesas') }}" class="link-nav">Despesas</a>
+
+                    <a href="{{ url_for('auth.minha_conta') }}" class="link-nav">Minha Conta</a>
+
+                    <form action="{{ url_for('auth.logout') }}" method="POST" class="form-logout">
+                        <button type="submit" class="btn-sair">Sair</button>
+                    </form>
+                </nav>
+
+            </div>
+        </div>
+    </header>
+
+    <main class="despesa-container">
+
+
+        <section class="titulo-pagina">
+            <h2>Gerenciamento de Despesas</h2>
+            <p>Cadastre e acompanhe suas despesas financeiras.</p>
+        </section>
+
+        
+        {% with mensagens = get_flashed_messages(with_categories=true) %}
+            {% if mensagens %}
+                {% for tipo, mensagem in mensagens %}
+                    <div class="mensagem {{ tipo }}">
+                        {{ mensagem }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        
+        <section class="selecao-despesa">
+
+            <h3>Qual tipo de despesa deseja cadastrar?</h3>
+
+            <div class="opcoes-despesa">
+
+                <button type="button" class="opcao-despesa" data-tipo="normal">
+                    <h4>Despesa normal</h4>
+                    <p>Registre uma despesa única, sem repetição.</p>
+                </button>
+
+                <button type="button" class="opcao-despesa" data-tipo="recorrente">
+                    <h4>Despesa recorrente</h4>
+                    <p>Registre despesas que se repetem periodicamente.</p>
+                </button>
+
+                <button type="button" class="opcao-despesa" data-tipo="parcelada">
+                    <h4>Compra parcelada</h4>
+                    <p>Registre compras divididas em várias parcelas.</p>
+                </button>
+
+            </div>
+
+        </section>
+
+        
+        <section class="formulario-despesa" id="area-formulario" style="display: none;">
+
+            <h3 id="titulo-formulario"></h3>
+
+            <div id="conteudo-formulario"></div>
+
+        </section>
+
+        
+        <section class="listagem-despesas">
+
+            <h3>Despesas cadastradas</h3>
+
+            {% if despesas %}
+
+                <div class="table-responsive">
+
+                    <table class="table tabela-despesas">
+
+                        <thead>
+                            <tr>
+                                <th>Descrição</th>
+                                <th>Categoria</th>
+                                <th>Valor</th>
+                                <th>Vencimento</th>
+                                <th>Tipo</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            {% for despesa in despesas %}
+
+                                <tr>
+                                    <td>
+                                        {{ despesa.descricao }}
+                                        {% if despesa.numero_parcela and despesa.total_parcelas %}
+                                            ({{ despesa.numero_parcela }}/{{ despesa.total_parcelas }})
+                                        {% endif %}
+                                    </td>
+
+                                    <td>{{ despesa.categoria.nome }}</td>
+
+                                    <td>R$ {{ "%.2f"|format(despesa.valor) }}</td>
+
+                                    <td>
+                                        {{ despesa.data_vencimento.strftime('%d/%m/%Y') }}
+                                    </td>
+
+                                    <td>
+                                        {% if despesa.id_recorrencia %}
+                                            Recorrente
+                                        {% elif despesa.id_compra_parcelada %}
+                                            Parcelada
+                                        {% else %}
+                                            Normal
+                                        {% endif %}
+                                    </td>
+
+                                    <td>
+                                        {% if despesa.status == "PAGA" %}
+                                            <span class="status-paga">Paga</span>
+
+                                        {% elif despesa.status == "CANCELADA" %}
+                                            <span class="status-cancelada">Cancelada</span>
+
+                                        {% else %}
+                                            <span class="status-pendente">Pendente</span>
+                                        {% endif %}
+                                    </td>
+
+                                    <td>
+                                        {% if despesa.status == "PENDENTE" %}
+
+                                            <div class="acoes-despesa">
+
+                                                {% if despesa.id_recorrencia is none and despesa.id_compra_parcelada is none %}
+
+                                                    <!-- Ações de despesa normal -->
+
+                                                    <button
+                                                        type="button"
+                                                        class="btn-editar-despesa"
+                                                        data-id="{{ despesa.id_despesa }}">
+                                                        Editar
+                                                    </button>
+
+                                                    <form
+                                                        action="{{ url_for('auth.cancelar_despesa', id_despesa=despesa.id_despesa) }}"
+                                                        method="POST"
+                                                        class="form-cancelar-despesa"
+                                                        onsubmit="return confirm('Tem certeza de que deseja cancelar esta despesa?');">
+
+                                                        <button type="submit" class="btn-cancelar-despesa">
+                                                            Cancelar
+                                                        </button>
+
+                                                    </form>
+
+                                                {% elif despesa.id_recorrencia is not none %}
+
+                                                    <!-- Ações de despesa recorrente -->
+
+                                                    {% if despesa.recorrencia.ativa %}
+
+                                                        <button
+                                                            type="button"
+                                                            class="btn-editar-despesa"
+                                                            data-id="{{ despesa.id_despesa }}">
+                                                            Editar
+                                                        </button>
+
+                                                        <form
+                                                            action="{{ url_for('auth.cancelar_recorrencia', id_recorrencia=despesa.id_recorrencia) }}"
+                                                            method="POST"
+                                                            class="form-cancelar-despesa"
+                                                            onsubmit="return confirm('Cancelar esta recorrência e suas despesas futuras pendentes?');">
+
+                                                            <button type="submit" class="btn-cancelar-despesa">
+                                                                Cancelar recorrência
+                                                            </button>
+
+                                                        </form>
+
+                                                    {% else %}
+
+                                                        <span>Recorrência cancelada</span>
+
+                                                    {% endif %}
+
+                                                {% elif despesa.id_compra_parcelada is not none %}
+
+                                                    <button
+                                                        type="button"
+                                                        class="btn-editar-despesa"
+                                                        data-id="{{ despesa.id_despesa }}">
+                                                        Editar
+                                                    </button>
+
+                                                    <form
+                                                        action="{{ url_for('auth.cancelar_despesa', id_despesa=despesa.id_despesa) }}"
+                                                        method="POST"
+                                                        class="form-cancelar-despesa"
+                                                        onsubmit="return confirm('Tem certeza de que deseja cancelar somente esta parcela?');">
+
+                                                        <button type="submit" class="btn-cancelar-despesa">
+                                                            Cancelar parcela
+                                                        </button>
+
+                                                    </form>
+
+                                                {% endif %}
+
+                                            </div>
+
+                                        {% else %}
+
+                                            <span>Sem ações</span>
+
+                                        {% endif %}
+                                    </td>
+                                </tr>
+
+
+                                {% if despesa.status == "PENDENTE" %}
+
+                                    <tr id="form-edicao-despesa-{{ despesa.id_despesa }}" style="display: none;">
+
+                                        <td colspan="7">
+
+                                            <form
+                                                action="{% if despesa.id_recorrencia is not none %}{{ url_for('auth.editar_despesa_recorrente', id_despesa=despesa.id_despesa) }}{% else %}{{ url_for('auth.editar_despesa', id_despesa=despesa.id_despesa) }}{% endif %}"
+                                                method="POST"
+                                                class="form-edicao-despesa">
+
+                                                <div class="campo-edicao">
+                                                    <label>Descrição</label>
+                                                    <input
+                                                        type="text"
+                                                        name="descricao"
+                                                        value="{{ despesa.descricao }}"
+                                                        maxlength="150"
+                                                        required>
+                                                </div>
+
+                                                <div class="campo-edicao">
+                                                    <label>Categoria</label>
+
+                                                    <select name="id_categoria" required>
+
+                                                        {% for categoria in categorias %}
+                                                            <option
+                                                                value="{{ categoria.id }}"
+                                                                {% if categoria.id == despesa.id_categoria %}selected{% endif %}>
+                                                                {{ categoria.nome }}
+                                                            </option>
+                                                        {% endfor %}
+
+                                                    </select>
+                                                </div>
+
+                                                <div class="campo-edicao">
+                                                    <label>Valor</label>
+                                                    <input
+                                                        type="number"
+                                                        name="valor"
+                                                        min="0.01"
+                                                        step="0.01"
+                                                        value="{{ despesa.valor }}"
+                                                        required>
+                                                </div>
+
+
+                                                {% if despesa.id_recorrencia is none %}
+                                                    <div class="campo-edicao">
+                                                        <label>Data de vencimento</label>
+                                                        <input
+                                                            type="date"
+                                                            name="data_vencimento"
+                                                            value="{{ despesa.data_vencimento.isoformat() }}"
+                                                            required>
+                                                    </div>
+                                                {% endif %}
+
+
+                                                <div class="campo-edicao campo-status-edicao">
+                                                    <label>Status</label>
+
+                                                    <select name="status" required>
+                                                        <option value="PENDENTE" {% if despesa.status == "PENDENTE" %}selected{% endif %}>
+                                                            Pendente
+                                                        </option>
+
+                                                        <option value="PAGA" {% if despesa.status == "PAGA" %}selected{% endif %}>
+                                                            Paga
+                                                        </option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="acoes-edicao">
+
+                                                    {% if despesa.id_recorrencia is not none %}
+
+                                                        <button
+                                                            type="submit"
+                                                            class="btn-salvar-despesa">
+                                                            Salvar somente este lançamento
+                                                        </button>
+
+                                                        <button
+                                                            type="submit"
+                                                            class="btn-salvar-despesa btn-salvar-proximas"
+                                                            formaction="{{ url_for('auth.editar_proximas_despesas_recorrentes', id_despesa=despesa.id_despesa) }}">
+                                                            Salvar este e os próximos
+                                                        </button>
+
+                                                    {% else %}
+
+                                                        <button type="submit" class="btn-salvar-despesa">
+                                                            Salvar alterações
+                                                        </button>
+
+                                                    {% endif %}
+
+                                                    <button
+                                                        type="button"
+                                                        class="btn-fechar-edicao"
+                                                        data-id="{{ despesa.id_despesa }}">
+                                                        Cancelar edição
+                                                    </button>
+
+                                                </div>
+
+                                            </form>
+
+                                        </td>
+
+                                    </tr>
+
+                                {% endif %}
+                               
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            {% else %}
+
+                <p class="sem-despesas">
+                    Nenhuma despesa cadastrada até o momento.
+                </p>
+
+            {% endif %}
+
+        </section>
+
+    </main>
+
+    <div
+        id="dados-categorias"
+        data-categorias="{{ categorias | tojson | forceescape }}"
+        hidden>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/despesa.js') }}"></script>
+
+</body>
+</html>
